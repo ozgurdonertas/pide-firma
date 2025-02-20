@@ -1,0 +1,22 @@
+Options -Indexes
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Temel Güvenlik Başlıkları
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval' http: data:;"
+</IfModule>
+
+# Dosya Erişim Kısıtlamaları
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# PHP Hata Gizleme
+php_flag display_errors off
+php_value error_reporting 0
